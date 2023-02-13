@@ -28,7 +28,6 @@ in
   hardware.raspberry-pi."4".pwm0.enable = true;
 
 
-
 #  boot = {
 #    kernelPackages = pkgs.linuxPackages_rpi4;
 #    tmpOnTmpfs = true;
@@ -52,7 +51,7 @@ in
   # Required for the Wireless firmware
 #  hardware.enableRedistributableFirmware = true;  
 
-  
+  programs.bash.loginShellInit = "source ~/.bashrc";  
 
   # Create gpio group
   users.groups.gpio = {};
@@ -64,7 +63,13 @@ in
     SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio",MODE="0660"
     SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio  /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
     SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
+    SUBSYSTEM=="pwm*", ACTION=="add|change", RUN +="${pkgs.bash}/bin/bash - c 'chown -R root:gpio /sys/class/pwm/ && chmod -R 770 /sys/class/pwm/;\ 
+    chown -R root:gpio /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ && chmod -R 770 /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ '"
 '';
+
+# chown -R root:gpio /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport; chmod -R 220 /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport;\ 
+  
+  
     # SUBSYSTEM=="pwm*", PROGRAM="/bin/sh -c '\
     #     chown -R root:gpio /sys/class/pwm && chmod -R 770 /sys/class/pwm;\
     #     chown -R root:gpio /sys/devices/platform/soc/*.spi/spi_master/spi1/spi1.0/pwm/pwmchip0 && chmod -R 770 /sys/devices/platform/soc/*.spi/spi_master/spi1/spi1.0/pwm/pwmchip0\ 
@@ -75,9 +80,11 @@ in
   # Add user to group
   users = {
     users.nixos = {
-      extraGroups = [ "gpio" ];
+      extraGroups = [ "gpio" "video" ];
     };
   };
+
+  # gnu = true;
 
   # let
   # my-python-packages = p: with p; [
@@ -100,10 +107,11 @@ in
     # pkgs.python39Packages.gpiozero
     # pkgs.python39Packages.rpi-gpio
     # pkgs.python39Packages.rpi-gpio2
-    # pkgs.lm_sensors
+    pkgs.lm_sensors
     pkgs.htop
     pkgs.libraspberrypi
     pkgs.git
+    pkgs.helix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -178,6 +186,8 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   # services.openssh.permitRootLogin="yes";
+
+  services.openssh.permitRootLogin = "prohibit-password";
 
   users.extraUsers.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL3TnbqO+bgzwQAZW+kEm1u0l7EBqOcU1/MlFRg8+lZ bartosz@hp-debian" ];
 
