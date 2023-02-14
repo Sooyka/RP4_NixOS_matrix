@@ -115,6 +115,7 @@ in
     pkgs.git
     pkgs.helix
     pkgs.ssh-agents
+    pkgs.xclip
   ];
 
 
