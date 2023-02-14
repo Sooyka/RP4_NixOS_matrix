@@ -4,15 +4,14 @@
 
 { config, pkgs, ... }:
 let
-    rp4_hardware = builtins.fetchGit {
-      url = "https://github.com/NixOS/nixos-hardware.git";
-      rev = "b7ac0a56029e4f9e6743b9993037a5aaafd57103";
-    };
+    # rp4_hardware = builtins.fetchGit {
+    #   url = "https://github.com/NixOS/nixos-hardware.git";
+    #   rev = "b7ac0a56029e4f9e6743b9993037a5aaafd57103";
+    # };
     device = "raspberry-pi/4";
 in
 {
-  imports = ["${fetchTarball "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz" }/raspberry-pi/4" 
-  
+  imports = [  
   "${rp4_hardware}/${device}/pwm0.nix"
   ];
 
