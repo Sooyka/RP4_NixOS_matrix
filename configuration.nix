@@ -112,6 +112,7 @@ in
     pkgs.libraspberrypi
     pkgs.git
     pkgs.helix
+    pkgs.ssh-agents
   ];
 
 
