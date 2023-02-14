@@ -24,6 +24,7 @@
     (
       {
         nixosConfigurations.RP4NixOS = nixpkgs.lib.nixosSystem {
+          specialArgs.hardware = inputs.rp4_hardware;
           # system = "x86_64-linux";
           modules = [
             # home-manager.nixosModules.home-manager {
