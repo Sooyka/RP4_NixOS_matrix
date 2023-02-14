@@ -117,7 +117,7 @@ in
     pkgs.git
     pkgs.helix
     pkgs.ssh-agents
-    pkgs.xclip
+    # pkgs.xclip
     # pkgs.termcode
   ];
 
