@@ -66,6 +66,8 @@ in
     SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio  /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
     SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
     SUBSYSTEM=="pwm*", ACTION=="add|change", RUN +="${pkgs.bash}/bin/bash - c 'chown -R root:gpio /sys/class/pwm/ && chmod -R 770 /sys/class/pwm/;\ 
+    chown -R root:gpio /sys/class/pwm/pwmchip0/ && chmod -R 770 /sys/class/pwm/pwmchip0/;\
+    chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0/ && chmod -R 770 /sys/class/pwm/pwmchip0/pwm0/;\
     chown -R root:gpio /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ && chmod -R 770 /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ '"
 '';
 
@@ -115,7 +117,8 @@ in
     pkgs.git
     pkgs.helix
     pkgs.ssh-agents
-    pkgs.xclip
+    # pkgs.xclip
+    # pkgs.termcode
   ];
 
 
