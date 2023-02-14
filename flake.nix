@@ -9,7 +9,7 @@
   	fan_controller = {
 				url = "github:Sooyka/RP4_fan_service/main";
 				inputs.nixpkgs.follows = "nixpkgs";
-		}
+		};
   };
 
   outputs =
