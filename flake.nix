@@ -14,7 +14,7 @@
     rp4_hardware = {
       url = "github:NixOS/nixos-hardware/master";
       # rev = "b7ac0a56029e4f9e6743b9993037a5aaafd57103";
-      inputs.nixpkgs.follows = "nixpkgs";    
+      # inputs.nixpkgs.follows = "nixpkgs";    
     };
     
   };
