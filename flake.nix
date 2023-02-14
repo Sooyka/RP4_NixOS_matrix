@@ -23,7 +23,7 @@
     { self, nixpkgs, rp4_hardware, ... }@inputs:
     (
       {
-        nixosConfigurations.RP4NixOS = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.RP4_NixOS = nixpkgs.lib.nixosSystem {
           specialArgs.rp4_hardware = inputs.rp4_hardware;
           # system = "x86_64-linux";
           modules = [
