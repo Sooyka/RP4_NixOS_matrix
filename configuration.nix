@@ -12,7 +12,7 @@ let
 in
 {
   imports = [  
-  ./hardware-configuration.nix
+  # ./hardware-configuration.nix
   # "${rp4_hardware.url}/${device}/pwm0.nix"
   rp4_hardware.nixosModules.raspberry-pi-4
   ];
@@ -47,8 +47,8 @@ in
  #   enable = true;
  #   version = 4;
  # };
- boot.loader.grub.enable = false;
- boot.loader.generic-extlinux-compatible.enable = true;
+ # boot.loader.grub.enable = false;
+ # boot.loader.generic-extlinux-compatible.enable = true;
   # Required for the Wireless firmware
 #  hardware.enableRedistributableFirmware = true;  
 
