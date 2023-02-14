@@ -28,6 +28,7 @@ in
 
   hardware.raspberry-pi."4".pwm0.enable = true;
 
+  nixpkgs.hostPlatform = { system = "aarch64-linux"; config = "aarch64-unknown-linux-gnu"; };
 
 #  boot = {
 #    kernelPackages = pkgs.linuxPackages_rpi4;

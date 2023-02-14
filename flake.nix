@@ -25,7 +25,7 @@
       {
         nixosConfigurations.RP4NixOS = nixpkgs.lib.nixosSystem {
           specialArgs.rp4_hardware = inputs.rp4_hardware;
-          system = "arm-linux";
+          # system = "x86_64-linux";
           modules = [
             # home-manager.nixosModules.home-manager {
             #   home-manager.extraSpecialArgs = { inherit inputs; };
