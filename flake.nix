@@ -20,7 +20,7 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    { self, nixpkgs, rp4_hardware, ... }@inputs:
     (
       {
         nixosConfigurations.RP4NixOS = nixpkgs.lib.nixosSystem {
