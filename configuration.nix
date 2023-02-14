@@ -11,10 +11,10 @@ let
     device = "raspberry-pi/4";
 in
 {
-  # imports = [  
+  imports = [  
   # "${rp4_hardware.url}/${device}/pwm0.nix"
-  # ];
-  rp4_hardware.nixosModules.raspberry-pi-4;
+  rp4_hardware.nixosModules.raspberry-pi-4
+  ];
 
   fileSystems = {
     "/" = {
