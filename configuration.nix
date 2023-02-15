@@ -116,9 +116,11 @@ in
     pkgs.libraspberrypi
     pkgs.git
     pkgs.helix
-    pkgs.ssh-agents
+    # pkgs.ssh-agents
     # pkgs.xclip
     # pkgs.termcode
+    pkgs.nginx
+    pkgs.certbot
   ];
 
 
@@ -216,7 +218,7 @@ in
 
   # services.synapse = import ./synapse.nix;
 
-  # services.nginx = import ./nginx.nix;
+  services.nginx = import ./nginx.nix;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
