@@ -220,6 +220,7 @@ in
 
   services.nginx = import ./nginx.nix;
   security.acme.acceptTerms = true;
+  security.acme.defaults.email = import /home/nixos/.config/email_address;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
