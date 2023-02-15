@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "fan_controller": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676357437,
+        "narHash": "sha256-V8Pld55FBaeqULusTu2axiQmw5Dfuf7Mcn/TV1OXeOI=",
+        "owner": "Sooyka",
+        "repo": "RP4_fan_service",
+        "rev": "0f95ff7b00da2688717a10925403d99d66a0a52d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sooyka",
+        "ref": "main",
+        "repo": "RP4_fan_service",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1676177817,
@@ -17,6 +38,7 @@
     },
     "root": {
       "inputs": {
+        "fan_controller": "fan_controller",
         "nixpkgs": "nixpkgs",
         "rp4_hardware": "rp4_hardware"
       }

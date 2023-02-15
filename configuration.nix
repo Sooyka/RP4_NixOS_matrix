@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, rp4_hardware, ... }:
+{ config, pkgs, rp4_hardware, fan_controller, ... }:
 let
     # rp4_hardware = builtins.fetchGit {
     #   url = "https://github.com/NixOS/nixos-hardware.git";

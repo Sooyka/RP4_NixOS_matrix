@@ -6,10 +6,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-  # 	fan_controller = {
-		# 		url = "github:Sooyka/RP4_fan_service/main";
-		# 		inputs.nixpkgs.follows = "nixpkgs";
-		# };
+  	fan_controller = {
+				url = "github:Sooyka/RP4_fan_service/main";
+				inputs.nixpkgs.follows = "nixpkgs";
+		};
 
     rp4_hardware = {
       url = "github:NixOS/nixos-hardware/master";
@@ -20,12 +20,13 @@
   };
 
   outputs =
-    { self, nixpkgs, rp4_hardware, ... }@inputs:
+    { self, nixpkgs, rp4_hardware, fan_controller, ... }@inputs:
     (
       {
         nixosConfigurations."RP4-NixOS" = nixpkgs.lib.nixosSystem {
           specialArgs.rp4_hardware = inputs.rp4_hardware;
-          # system = "x86_64-linux";
+          specialArgs.fan_controller = inputs.fan_controller;
+          system = "aarch64-linux";
           modules = [
             # home-manager.nixosModules.home-manager {
             #   home-manager.extraSpecialArgs = { inherit inputs; };
