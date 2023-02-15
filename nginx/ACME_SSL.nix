@@ -1,4 +1,4 @@
-{
+[
   enableAMCE = true;
   forceSSL =true;
-}
+]
