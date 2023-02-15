@@ -1,5 +1,5 @@
 {
   enable = true;
   
-  config = ./nginx.conf;  
+  config = import ./nginx.conf;  
 }
