@@ -4,6 +4,6 @@
   # enableACME = true;
 	
 	locations."/" = {
-      root = "/home/nixos/https_server";
+      return = "200 '{"a": {"b": "b"}}'";
   };
 }
