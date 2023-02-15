@@ -1,0 +1,2 @@
+enableAMCE = true;
+forceSSL =true;

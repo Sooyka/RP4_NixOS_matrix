@@ -120,7 +120,7 @@ in
     # pkgs.xclip
     # pkgs.termcode
     pkgs.nginx
-    pkgs.certbot
+    # pkgs.certbot
   ];
 
 
