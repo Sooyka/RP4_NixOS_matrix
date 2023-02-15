@@ -202,7 +202,8 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   # services.openssh.permitRootLogin="yes";
-
+  services.openssh.passwordAuthentication = false;
+  services.openssh.ports = [62442];
   services.openssh.permitRootLogin = "prohibit-password";
 
   users.extraUsers.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL3TnbqO+bgzwQAZW+kEm1u0l7EBqOcU1/MlFRg8+lZ bartosz@hp-debian" ];
