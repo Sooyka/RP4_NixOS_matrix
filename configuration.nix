@@ -217,7 +217,7 @@ in
   # services.coturn = import ./coturn.nix;
 
   # services.synapse = import ./synapse.nix;
-  # users.groups."https_server".members = ["nixos" "nginx"];
+  users.groups."https_server".members = ["nixos" "nginx"];
   systemd.services.nginx.serviceConfig.ReadWritePaths = [ "/home/nixos/https_server/" ];
   services.nginx = import ./nginx.nix;
   security.acme.acceptTerms = true;
