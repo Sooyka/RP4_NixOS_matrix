@@ -4,6 +4,6 @@
   # enableACME = true;
 	
 	locations."/" = {
-      return = "200 '{'a': {'b': 'b'}}'";
+      return = "200 a";
   };
 }
