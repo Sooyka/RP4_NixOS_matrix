@@ -219,7 +219,7 @@ in
   # services.synapse = import ./synapse.nix;
 
   services.nginx = import ./nginx.nix;
-
+  security.acme.acceptTerms = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
