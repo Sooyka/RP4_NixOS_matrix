@@ -9,6 +9,11 @@ let
     #   rev = "b7ac0a56029e4f9e6743b9993037a5aaafd57103";
     # };
     device = "raspberry-pi/4";
+    # particularisation_config = import ./particularisation_config.nix;
+    particularisation_config = {
+      domain_name = import "/home/nixos/.config/particularisation_config/domain_name.nix";           
+      email_address = import "/home/nixos/.config/particularisation_config/email_address.nix";
+    };
 in
 {
   imports = [  
@@ -219,10 +224,9 @@ in
   # services.synapse = import ./synapse.nix;
   # users.groups."https_server".members = ["nixos" "nginx"];
   networking.firewall.allowedTCPPorts = [62442 80 443];
-  systemd.services.nginx.serviceConfig.ReadWritePaths = [ "/home/nixos/https_server/" ];
-  services.nginx = import ./nginx.nix;
+  services.nginx = (import ./nginx.nix) {particularisation_config=particularisation_config;};
   security.acme.acceptTerms = true;
-  security.acme.defaults.email = import ../../../home/nixos/.config/email_address;
+  security.acme.defaults.email = particularisation_config.email_address;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

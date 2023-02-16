@@ -1,11 +1,15 @@
+# let 
+#   particularisation_config = import ./particularisation_config.nix;
+# in
+{particularisation_config, ...}:
 {
   enable = true;
   # logError = "/home/nixos/https_server/log_error";  
   # logError = "syslog: warn"; 
   virtualHosts = {
-    "sooyka.xyz" = import ./nginx/sooyka_xyz.nix;
-    # "www.sooyka.xyz" = import ./nginx/www_sooyka_xyz.nix;
-    # "matrix.sooyka.xyz" = import ./nginx/matrix_sooyka_xyz.nix;
-    # "turn.sooyka.xyz" = import ./nginx/turn_sooyka_xyz.nix;
+    "${particularisation_config.domain_name}" = import ./nginx/${particularisation_config.domain_name}.nix;
+    # "www.${particularisation_config.domain_name}" = import ./nginx/www_${particularisation_config.domain_name}.nix;
+    # "matrix.${particularisation_config.domain_name}" = import ./nginx/matrix_${particularisation_config.domain_name}.nix;
+    # "turn.${particularisation_config.domain_name}" = import ./nginx/turn_${particularisation_config.domain_name}.nix;
   };
 }
