@@ -1,9 +1,10 @@
 {
 	# import ./ACME_SSL.nix
-	# addSSL = true;
-  # enableACME = true;
+	addSSL = true;
+  enableACME = true;
 	
 	locations."/" = {
-      return = "200 '{''a'': 1'}'";
+      root = "/var/https_server";
+
   };
 }

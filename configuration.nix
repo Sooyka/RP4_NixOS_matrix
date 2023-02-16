@@ -84,7 +84,7 @@ in
   # Add user to group
   users = {
     users.nixos = {
-      extraGroups = [ "gpio" "video" ];
+      extraGroups = [ "gpio" "video" "nginx"];
     };
   };
 
@@ -222,7 +222,7 @@ in
   systemd.services.nginx.serviceConfig.ReadWritePaths = [ "/home/nixos/https_server/" ];
   services.nginx = import ./nginx.nix;
   security.acme.acceptTerms = true;
-  security.acme.defaults.email = import /home/nixos/.config/email_address;
+  security.acme.defaults.email = import ../../../home/nixos/.config/email_address;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
