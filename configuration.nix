@@ -218,6 +218,7 @@ in
 
   # services.synapse = import ./synapse.nix;
   # users.groups."https_server".members = ["nixos" "nginx"];
+  networking.firewall.allowedTCPPorts = [62442 80 443];
   systemd.services.nginx.serviceConfig.ReadWritePaths = [ "/home/nixos/https_server/" ];
   services.nginx = import ./nginx.nix;
   security.acme.acceptTerms = true;
