@@ -224,7 +224,7 @@ in
   # services.synapse = import ./synapse.nix;
   # users.groups."https_server".members = ["nixos" "nginx"];
   networking.firewall.allowedTCPPorts = [62442 80 443];
-  services.nginx = (import ./nginx.nix) {particularisation_config=particularisation_config;};
+  services.nginx = import ./nginx.nix;
   security.acme.acceptTerms = true;
   security.acme.defaults.email = particularisation_config.email_address;
   # Open ports in the firewall.
