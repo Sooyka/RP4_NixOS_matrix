@@ -10,7 +10,15 @@
     return = "301 https://$server_name/_matrix/static";
   };  
   
-  listen = [{
+  listen = [
+  {
+    port = 80;
+  } 
+  {
+    port = 443;
+    ssl = true;
+  } 
+  {
     port = 8448;
     ssl = true;
     addr = "default_server";
