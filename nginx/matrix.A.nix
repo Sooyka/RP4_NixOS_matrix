@@ -10,11 +10,11 @@
     return = "301 https://$server_name/_matrix/static";
   };  
   
-  listen = {
-    port = "8448";
+  listen = [{
+    port = 8448;
     ssl = true;
     addr = "default_server";
-  };
+  }];
   
   locations."/_matrix" = {
     proxyPass = "http://[::1]:8008";
