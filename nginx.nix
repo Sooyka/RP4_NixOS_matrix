@@ -7,9 +7,9 @@
   # logError = "/home/nixos/https_server/log_error";  
   # logError = "syslog: warn"; 
   virtualHosts = {
-    "${particularisation_config.domain_name}" = import ./nginx/${particularisation_config.domain_name}.nix;
-    "www.${particularisation_config.domain_name}" = import ./nginx/www_${particularisation_config.domain_name}.nix;
-    "matrix.${particularisation_config.domain_name}" = import ./nginx/matrix_${particularisation_config.domain_name}.nix;
-    "turn.${particularisation_config.domain_name}" = import ./nginx/turn_${particularisation_config.domain_name}.nix;
+    "${particularisation_config.domain_name}" = import ./nginx/A.nix;
+    "www.${particularisation_config.domain_name}" = import ./nginx/www.A.nix;
+    # "matrix.${particularisation_config.domain_name}" = import ./nginx/matrix.A.nix;
+    # "turn.${particularisation_config.domain_name}" = import ./nginx/turn.A.nix;
   };
 }
