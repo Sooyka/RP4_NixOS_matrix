@@ -33,7 +33,7 @@ in
 
   hardware.raspberry-pi."4".pwm0.enable = true;
 
-  nixpkgs.hostPlatform = { system = "aarch64-linux"; config = "aarch64-unknown-linux-gnu"; };
+  nixpkgs.hostPlatform = { system = particularisation_config.hostPlatform.system; config = particularisation_config.hostPlatform.config; };
 
 #  boot = {
 #    kernelPackages = pkgs.linuxPackages_rpi4;

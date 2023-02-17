@@ -26,7 +26,7 @@
         nixosConfigurations."RP4-NixOS" = nixpkgs.lib.nixosSystem {
           specialArgs.rp4_hardware = inputs.rp4_hardware;
           specialArgs.fan_controller = inputs.fan_controller;
-          system = "aarch64-linux";
+          # system = "aarch64-linux";
           modules = [
             # home-manager.nixosModules.home-manager {
             #   home-manager.extraSpecialArgs = { inherit inputs; };
