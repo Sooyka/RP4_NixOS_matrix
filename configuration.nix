@@ -143,7 +143,8 @@ in
 
   # environment.etc."dupa".text = "test dupy";
 
-  networking.hostName = "RP4-NixOS"; # Define your hostname.
+  networking.hostName = particularisation_config.host_name; # Define your hostname.
+  networking.domain = particularisation_config.domain_name;
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -223,7 +224,7 @@ in
 
   # services.synapse = import ./synapse.nix;
   # users.groups."https_server".members = ["nixos" "nginx"];
-  networking.firewall.allowedTCPPorts = [62442 80 443];
+  networking.firewall.allowedTCPPorts = [62442 80 443 8448];
   services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
   security.acme.acceptTerms = true;
   security.acme.defaults.email = particularisation_config.email_address;
