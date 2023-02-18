@@ -222,12 +222,29 @@ in
 
   # services.coturn = import ./coturn.nix;
 
-  # services.synapse = import ./synapse.nix;
+  services.matirx-synapse = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
   # users.groups."https_server".members = ["nixos" "nginx"];
   networking.firewall.allowedTCPPorts = [62442 80 443 8448];
   services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
   security.acme.acceptTerms = true;
   security.acme.defaults.email = particularisation_config.email_address;
+  
+  deployment.keys.matrix-synapse_registration_shared_secret = {
+   text = import "/home/nixos/.config/keys/matrix-synapse_registration_shared_secret"; 
+  };
+  
+  deployment.keys.matrix-synapse_turn_shared_secret = {
+   text = import "/home/nixos/.config/keys/matrix-synapse_turn_shared_secret"; 
+  };
+  
+  deployment.keys.matrix-synapse_macaroon_secret_key = {
+   text = import "/home/nixos/.config/keys/matrix-synapse_macaroon_secret_key"; 
+  };
+  
+  deployment.keys.matrix-synapse_form_secret = {
+   text = import "/home/nixos/.config/keys/matrix-synapse_form_secret"; 
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

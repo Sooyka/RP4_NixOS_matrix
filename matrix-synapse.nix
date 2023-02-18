@@ -1,0 +1,41 @@
+{particularisation_config, ...}:
+{
+  enable = true;
+  settings = {
+    server_name = particularisation_config.domain_name;
+    public_baseurl = "https://matrix." + particularisation_config.domain_name + ":8448/";
+    listeners = [
+      {
+        port = 8008;
+        bind_addresses = [ "::1" ];
+        type = "http";
+        tls = false;
+        x_forwarded = true;
+        resources =[
+          {
+            names = [ "client" "federation" ];
+            compress = false;
+          }
+        ];
+      }
+    ]; 
+    database = {
+      name = "sqlite3";
+      args.user = null;
+    };
+    max_upload_size = "200M";
+    # report_stats = true;
+    
+    turn_uris = [ 
+    "turns:turn." + particularisation_config.domain_name + "?transport=udp" 
+    "turns:turn." + particularisation_config.domain_name + "?transport=tcp"
+    ];
+    
+  };
+  extraConfigFiles = [ 
+    "/run/keys/matrix-synapse_registration_shared_secret" 
+    "/run/keys/matrix-synapse_turn_shared_secret" 
+    "/run/keys/matrix-synapse_macaroon_secret_key" 
+    "/run/keys/matrix-synapse_form_secret"
+  ];
+}
