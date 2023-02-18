@@ -4,7 +4,7 @@
   min-port = 64000;
   max-port = 65535;
   use-auth-secret = true;
-  static-auth-secret = import particularisation_config.keys_paths.matrix-synapse_turn_shared_secret;
+  static-auth-secret = "${import particularisation_config.keys_paths.matrix-synapse_turn_shared_secret}";
   realm = particularisation_config.domain_name;
   no-udp = true;
   no-tcp = true;
