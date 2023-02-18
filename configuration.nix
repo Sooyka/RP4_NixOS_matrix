@@ -91,6 +91,7 @@ in
     users.nixos = {
       extraGroups = [ "gpio" "video" "nginx"];
     };
+    users.nginx.extraGroups = ["turnserver"];
   };
 
   # gnu = true;
