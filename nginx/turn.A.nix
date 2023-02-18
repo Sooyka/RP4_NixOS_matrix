@@ -2,7 +2,7 @@
   enableACME = true;
   forceSSL = true;
   
-  location."/" = {
+  locations."/" = {
     root = "/var/https_server";
     index = "coturn_index.html";
   };
