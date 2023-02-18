@@ -225,11 +225,21 @@ in
 
   services.matrix-synapse = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
   # users.groups."https_server".members = ["nixos" "nginx"];
-  networking.firewall.allowedTCPPorts = [62442 80 443 8448];
-  services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
-  security.acme.acceptTerms = true;
-  security.acme.defaults.email = particularisation_config.email_address;
+  services.coturn = (import ./coturn.nix) {particularisation_config = particularisation_config;};
+  networking.firewall = {
+    allowedTCPPorts = [62442 80 443 8448 5349 5350];
+    allowedUDPPortRanges = [ {from = 64000; to = 65535} ];
+  };
   
+  services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = particularisation_config.email_address;
+    certs."turn.${particularisation_config.domain_name}" = {
+      postRun = "systemctl restart coturn";
+      group = "turnserver";
+    };
+  };
   # deployment.keys = { 
   
   #   matrix-synapse_registration_shared_secret = {

@@ -14,6 +14,6 @@
     "${particularisation_config.domain_name}" = (import ./nginx/A.nix) {particularisation_config = particularisation_config;};
     "www.${particularisation_config.domain_name}" = import ./nginx/www.A.nix;
     "matrix.${particularisation_config.domain_name}" = import ./nginx/matrix.A.nix;
-    # "turn.${particularisation_config.domain_name}" = import ./nginx/turn.A.nix;
+    "turn.${particularisation_config.domain_name}" = import ./nginx/turn.A.nix;
   };
 }

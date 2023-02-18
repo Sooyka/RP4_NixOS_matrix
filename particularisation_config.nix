@@ -6,10 +6,13 @@
     system = import /home/nixos/.config/particularisation_config/hostPlatform.system.nix;
     config = import /home/nixos/.config/particularisation_config/hostPlatform.config.nix;  
   };
+  external_ip = import /home/nixos/.config/particularisation_config/external_ip;
+  local_ip = import /home/nixos/.config/particularisation_config/local_ip;
   keys_paths = {
     matrix-synapse_registration_shared_secret = "/var/lib/matrix-synapse/keys/registration_shared_secret";
     matrix-synapse_turn_shared_secret = "/var/lib/matrix-synapse/keys/turn_shared_secret";
     matrix-synapse_macaroon_secret_key = "/var/lib/matrix-synapse/keys/macaroon_secret_key";
     matrix-synapse_form_secret = "/var/lib/matrix-synapse/keys/form_secret";
+    turn_cli-password = "/var/lib/turn/cli-password";
   };
 }
