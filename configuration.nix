@@ -228,7 +228,7 @@ in
   services.coturn = (import ./coturn.nix) {particularisation_config = particularisation_config;};
   networking.firewall = {
     allowedTCPPorts = [62442 80 443 8448 5349 5350];
-    allowedUDPPortRanges = [ {from = 64000; to = 65535} ];
+    allowedUDPPortRanges = [ {from = 64000; to = 65535;} ];
   };
   
   services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
