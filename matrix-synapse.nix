@@ -27,8 +27,8 @@
     # report_stats = true;
     
     turn_uris = [ 
-    "turns:turn." + particularisation_config.domain_name + "?transport=udp" 
-    "turns:turn." + particularisation_config.domain_name + "?transport=tcp"
+    "turns:turn.${particularisation_config.domain_name}?transport=udp" 
+    "turns:turn.${particularisation_config.domain_name}?transport=tcp"
     ];
     
   };
