@@ -6,10 +6,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-  	fan_controller = {
-				url = "github:Sooyka/RP4_fan_service/main";
-				inputs.nixpkgs.follows = "nixpkgs";
-		};
+    fan_controller = {
+      url = "github:Sooyka/RP4_fan_service/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rp4_hardware = {
       url = "github:NixOS/nixos-hardware/master";
