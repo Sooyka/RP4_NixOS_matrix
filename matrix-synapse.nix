@@ -25,6 +25,7 @@
     };
     max_upload_size = "200M";
     # report_stats = true;
+    allow_guest_access = false;
     
     turn_uris = [ 
       "turns:turn.${particularisation_config.domain_name}?transport=udp" 
