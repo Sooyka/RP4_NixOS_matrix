@@ -33,9 +33,9 @@
     
   };
   extraConfigFiles = [ 
-    "/run/keys/matrix-synapse_registration_shared_secret" 
-    "/run/keys/matrix-synapse_turn_shared_secret" 
-    "/run/keys/matrix-synapse_macaroon_secret_key" 
-    "/run/keys/matrix-synapse_form_secret"
+    particularisation_config.keys_paths.matrix-synapse_registration_shared_secret
+    particularisation_config.keys_paths.matrix-synapse_turn_shared_secret
+    particularisation_config.keys_paths.matrix-synapse_macaroon_secret_key
+    particularisation_config.keys_paths.matrix-synapse_form_secret
   ];
 }
