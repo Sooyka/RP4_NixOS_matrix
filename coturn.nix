@@ -4,7 +4,7 @@
   min-port = 64000;
   max-port = 65535;
   use-auth-secret = true;
-  static-auth-secret = import particularisation_config.keys_paths.matrix-synapse_turn_shared_secret_string;
+  static-auth-secret = particularisation_config.matrix-synapse_turn_shared_secret_coturn;
   realm = particularisation_config.domain_name;
   no-udp = true;
   no-tcp = true;
@@ -13,7 +13,7 @@
   cert = "/var/lib/acme/turn.${particularisation_config.domain_name}/fullchain.pem";
   pkey = "/var/lib/acme/turn.${particularisation_config.domain_name}/key.pem";
   # dh-file = ;
-  cli-password = import particularisation_config.keys_paths.turn_cli-password;
+  cli-password = particularisation_config.keys_paths.turn_cli-password;
   extraConfig = ''
     verbose
     user-quota=12
