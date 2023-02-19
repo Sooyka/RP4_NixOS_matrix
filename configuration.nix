@@ -4,32 +4,24 @@
 
 { config, pkgs, rp4_hardware, fan_controller, ... }:
 let
-    # rp4_hardware = builtins.fetchGit {
-    #   url = "https://github.com/NixOS/nixos-hardware.git";
-    #   rev = "b7ac0a56029e4f9e6743b9993037a5aaafd57103";
-    # };
     device = "raspberry-pi/4";
     particularisation_config = import ./particularisation_config.nix;
     matrix-synapse_config = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
-    # particularisation_config = {
-    #   domain_name = import "/home/nixos/.config/particularisation_config/domain_name.nix";           
-    #   email_address = import "/home/nixos/.config/particularisation_config/email_address.nix";
-    # };
+    coturn_config = (import ./coturn.nix) {particularisation_config = particularisation_config;};
+    nginx_config = (import ./nginx.nix) {particularisation_config = particularisation_config;};
 in
 {
   imports = [  
-  # ./hardware-configuration.nix
-  # "${rp4_hardware.url}/${device}/pwm0.nix"
-  rp4_hardware.nixosModules.raspberry-pi-4
+    rp4_hardware.nixosModules.raspberry-pi-4
   ];
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = [ "noatime" ];
-    };
-  };
+  # fileSystems = {
+  #   "/" = {
+  #     device = "/dev/disk/by-label/NIXOS_SD";
+  #     fsType = "ext4";
+  #     options = [ "noatime" ];
+  #   };
+  # };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   hardware.raspberry-pi."4".pwm0.enable = true;
@@ -64,7 +56,6 @@ in
   # Create gpio group
   users.groups.gpio = {};
 
-  # boot.kernelPackages = pkgs.linuxPackages_rpi4;
 
   # Change permissions gpio devices
   services.udev.extraRules = ''
@@ -89,46 +80,27 @@ in
 
   # Add user to group
   users = {
-    users.nixos = {
-      extraGroups = [ "gpio" "video" "nginx"];
+    users = {
+      nixos = {
+        extraGroups = [ "gpio" "video" "nginx"];
+        isNormalUser = true;     
+      };
+      nginx.extraGroups = ["turnserver"];
     };
-    users.nginx.extraGroups = ["turnserver"];
   };
 
   # gnu = true;
 
-  # let
-  # my-python-packages = p: with p; [
-  #   gpiozero
-  #   # other python packages
-  # ];
-  # in
-  # environment.systemPackages = [
-  #   (pkgs.python3.withPackages my-python-packages)
-  #   pkgs.lm_sensors
-  #   pkgs.htop
-  # ];
   
   
   environment.systemPackages = [
-    # pkgs.python39.withPackages(ps: with ps; [ gpiozero rpi-gpio rpi-gpio2 ])
-    # (python310Packages(ps: with ps; [ libgpiod python-periphery ]))
     (pkgs.python3.withPackages (ps: with ps; [ libgpiod python-periphery ]))
-    # pkgs.python3.withPackages [gpiozero]
-    # pkgs.python39Packages.gpiozero
-    # pkgs.python39Packages.rpi-gpio
-    # pkgs.python39Packages.rpi-gpio2
     pkgs.lm_sensors
     pkgs.htop
     pkgs.libraspberrypi
     pkgs.git
     pkgs.helix
-    # pkgs.ssh-agents
-    # pkgs.xclip
-    # pkgs.termcode
     pkgs.nginx
-    # pkgs.certbot
-    # pkgs.nixops
   ];
 
 
@@ -211,30 +183,22 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  # services.openssh.permitRootLogin="yes";
-  services.openssh.passwordAuthentication = false;
-  services.openssh.ports = [62442];
-  services.openssh.permitRootLogin = "prohibit-password";
-
-  users.extraUsers.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL3TnbqO+bgzwQAZW+kEm1u0l7EBqOcU1/MlFRg8+lZ bartosz@hp-debian" ];
-
-  users.users.nixos.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL3TnbqO+bgzwQAZW+kEm1u0l7EBqOcU1/MlFRg8+lZ bartosz@hp-debian" ];
-
-  users.users.nixos.isNormalUser = true;
-
-  # services.coturn = import ./coturn.nix;
-
-  # services.matrix-synapse = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
-  services.matrix-synapse = matrix-synapse_config;
-  # users.groups."https_server".members = ["nixos" "nginx"];
-  services.coturn = (import ./coturn.nix) {particularisation_config = particularisation_config;};
-  networking.firewall = {
-    allowedTCPPorts = [62442 80 443 8448 5349 5350];
-    allowedUDPPortRanges = [ {from = 64000; to = 65535;} ];
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    ports = [62442];
+    permitRootLogin = "prohibit-password";
   };
+
+  users.extraUsers.root.openssh.authorizedKeys.keys = [ particularisation_config.public_ssh_key ];
+
+  users.users.nixos.openssh.authorizedKeys.keys = [ particularisation_config.public_ssh_key ];
   
-  services.nginx = (import ./nginx.nix) {particularisation_config = particularisation_config;};
+
+  services.matrix-synapse = matrix-synapse_config;
+  services.coturn = coturn_config;
+    
+  services.nginx = nginx_config;
   security.acme = {
     acceptTerms = true;
     defaults.email = particularisation_config.email_address;
@@ -243,29 +207,14 @@ in
       group = "turnserver";
     };
   };
-  # deployment.keys = { 
   
-  #   matrix-synapse_registration_shared_secret = {
-  #    text = import "/home/nixos/.config/keys/matrix-synapse_registration_shared_secret"; 
-  #   };
-
-  #   deployment.keys.matrix-synapse_turn_shared_secret = {
-  #    text = import "/home/nixos/.config/keys/matrix-synapse_turn_shared_secret"; 
-  #   };
-
-  #   deployment.keys.matrix-synapse_macaroon_secret_key = {
-  #    text = import "/home/nixos/.config/keys/matrix-synapse_macaroon_secret_key"; 
-  #   };
-
-  #   deployment.keys.matrix-synapse_form_secret = {
-  #    text = import "/home/nixos/.config/keys/matrix-synapse_form_secret"; 
-  #   };
-  
-  # };
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall = {
+    allowedTCPPorts = [62442 80 443 8448 5349 5350];
+    allowedUDPPortRanges = [ {from = 64000; to = 65535;} ];
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
