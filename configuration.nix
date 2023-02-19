@@ -101,6 +101,7 @@ in
     pkgs.git
     pkgs.helix
     pkgs.nginx
+    pkgs.ddclient
   ];
 
 
@@ -207,6 +208,8 @@ in
       group = "turnserver";
     };
   };
+  
+  services.ddclient.configFile = particularisation_config.ddcient_configFile;
   
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

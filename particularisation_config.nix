@@ -9,6 +9,7 @@
   external_ip = import /home/nixos/.config/particularisation_config/external_ip;
   local_ip = import /home/nixos/.config/particularisation_config/local_ip;
   public_ssh_key = import /home/nixos/.config/particularisation_config/public_ssh_key;
+  ddclient_configFile = /home/nixos/.config/particularisation_config/ddclient_configFile.conf;
   keys_paths = {
     matrix-synapse_registration_shared_secret = "/var/lib/matrix-synapse/keys/registration_shared_secret";
     matrix-synapse_turn_shared_secret = "/var/lib/matrix-synapse/keys/turn_shared_secret";
