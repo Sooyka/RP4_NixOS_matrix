@@ -1,15 +1,15 @@
 {
-  host_name = import /home/nixos/.config/particularisation_config/host_name.nix; 
-  domain_name = import /home/nixos/.config/particularisation_config/domain_name.nix;
-  email_address = import /home/nixos/.config/particularisation_config/email_address.nix;
+  host_name = ""; 
+  domain_name = "";
+  email_address = "";
   hostPlatform = {
-    system = import /home/nixos/.config/particularisation_config/hostPlatform.system.nix;
-    config = import /home/nixos/.config/particularisation_config/hostPlatform.config.nix;  
+    system = "";
+    config = "";  
   };
-  external_ip = import /home/nixos/.config/particularisation_config/external_ip;
-  local_ip = import /home/nixos/.config/particularisation_config/local_ip;
-  public_ssh_key = import /home/nixos/.config/particularisation_config/public_ssh_key;
-  ddclient_configFile = /home/nixos/.config/particularisation_config/ddclient_configFile.conf;
+  external_ip = "";
+  local_ip = "";
+  public_ssh_key = "";
+  ddclient_configFile = "";
   keys_paths = {
     matrix-synapse_registration_shared_secret = "/var/lib/matrix-synapse/keys/registration_shared_secret";
     matrix-synapse_turn_shared_secret = "/var/lib/matrix-synapse/keys/turn_shared_secret";
