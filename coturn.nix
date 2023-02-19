@@ -13,7 +13,7 @@
   cert = "/var/lib/acme/turn.${particularisation_config.domain_name}/fullchain.pem";
   pkey = "/var/lib/acme/turn.${particularisation_config.domain_name}/key.pem";
   # dh-file = ;
-  cli-password = particularisation_config.keys_paths.turn_cli-password;
+  cli-password = particularisation_config.turn_cli-password;
   extraConfig = ''
     verbose
     user-quota=12
