@@ -1,7 +1,6 @@
-
+{
   host_name = ""; 
   domain_name = "";
-  dupa = "";
   email_address = "";
   hostPlatform = {
     system = "";
