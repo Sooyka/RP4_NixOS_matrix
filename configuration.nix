@@ -15,13 +15,13 @@ in
     rp4_hardware.nixosModules.raspberry-pi-4
   ];
 
-  # fileSystems = {
-  #   "/" = {
-  #     device = "/dev/disk/by-label/NIXOS_SD";
-  #     fsType = "ext4";
-  #     options = [ "noatime" ];
-  #   };
-  # };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+  };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   hardware.raspberry-pi."4".pwm0.enable = true;
