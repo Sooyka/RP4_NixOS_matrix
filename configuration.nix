@@ -10,6 +10,7 @@ let
     # };
     device = "raspberry-pi/4";
     particularisation_config = import ./particularisation_config.nix;
+    matrix-synapse_config = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
     # particularisation_config = {
     #   domain_name = import "/home/nixos/.config/particularisation_config/domain_name.nix";           
     #   email_address = import "/home/nixos/.config/particularisation_config/email_address.nix";
@@ -224,7 +225,8 @@ in
 
   # services.coturn = import ./coturn.nix;
 
-  services.matrix-synapse = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
+  # services.matrix-synapse = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
+  services.matrix-synapse = matrix-synapse_config;
   # users.groups."https_server".members = ["nixos" "nginx"];
   services.coturn = (import ./coturn.nix) {particularisation_config = particularisation_config;};
   networking.firewall = {
