@@ -1,3 +1,4 @@
+{particularisation_config, ...}:
 {
   forceSSL = true;
   enableACME = true;
@@ -45,13 +46,13 @@
   
   locations."/_matrix" = {
     proxyPass = "http://[::1]:8008";
-    extraConfig = "proxy_set_header X-Forwarded-For $remote_addr;" + "client_max_body_size 200M;";
+    extraConfig = "proxy_set_header X-Forwarded-For $remote_addr;" + "client_max_body_size ${particularisation_config.matrix-synapse_max_upload_size};";
     
   };
   
   locations."/_synapse/client" = {
     proxyPass = "http://[::1]:8008";
-    extraConfig = "proxy_set_header X-Forwarded-For $remote_addr;" + "client_max_body_size 200M;";
+    extraConfig = "proxy_set_header X-Forwarded-For $remote_addr;" + "client_max_body_size ${particularisation_config.matrix-synapse_max_upload_size};";
   };
   
 }

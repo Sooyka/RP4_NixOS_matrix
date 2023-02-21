@@ -12,6 +12,7 @@
   ddclient_configFile = "";
   turn_cli-password = "";
   matrix-synapse_turn_shared_secret_coturn = "";
+  matrix-synspase_max_upload_size = "";
   keys_paths = {
     matrix-synapse_registration_shared_secret = "/var/lib/matrix-synapse/keys/registration_shared_secret";
     matrix-synapse_turn_shared_secret = "/var/lib/matrix-synapse/keys/turn_shared_secret";

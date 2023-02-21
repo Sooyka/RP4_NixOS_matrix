@@ -23,7 +23,7 @@
       name = "sqlite3";
       args.user = null;
     };
-    max_upload_size = "200M";
+    max_upload_size = particularisation_config.matrix-synapse_max_upload_size;
     # report_stats = true;
     allow_guest_access = false;
     
