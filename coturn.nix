@@ -33,6 +33,5 @@
     no-tlsv1_2
     no-sslv3
     no-rfc5780
-    no-stun-backward-compatibility
   '';  
 }
