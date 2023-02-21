@@ -25,6 +25,7 @@
     external-ip=${particularisation_config.external_ip}
     no-tlsv1
     no-tlsv1_1
+    no-tlsv1_2
     no-rfc5780
     no-stun-backwards-compatibility
     response-origin-only-with-rfc5780
