@@ -11,6 +11,8 @@
   public_ssh_key = "";
   ddclient_configFile = "";
   turn_cli-password = "";
+  turn_minimal_listening_port = "";
+  turn_maximal_listening_port = "";
   matrix-synapse_turn_shared_secret_coturn = "";
   matrix-synspase_max_upload_size = "";
   keys_paths = {

@@ -215,8 +215,8 @@ in
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall = {
-    allowedTCPPorts = [62442 80 443 8448 5349 5350];
-    allowedUDPPortRanges = [ {from = 64000; to = 65535;} ];
+    allowedTCPPorts = [ 62442 80 443 8448 5349 ];
+    allowedUDPPortRanges = [ {from = particularisation_config.turn_minimal_listening_port; to = particularisation_config_turn_maximal_listening_port;} ];
   };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

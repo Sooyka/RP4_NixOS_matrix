@@ -1,8 +1,8 @@
 {particularisation_config, ...}:
 {
   enable = true;
-  min-port = 49152;
-  max-port = 65535;
+  min-port = particularisation_config.turn_minimal_listening_port;
+  max-port = particularisation_config.turn_maximal_listening_port;
   use-auth-secret = true;
   static-auth-secret = particularisation_config.matrix-synapse_turn_shared_secret_coturn;
   realm = particularisation_config.domain_name;
