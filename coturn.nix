@@ -1,7 +1,7 @@
 {particularisation_config, ...}:
 {
   enable = true;
-  min-port = 64000;
+  min-port = 49152;
   max-port = 65535;
   use-auth-secret = true;
   static-auth-secret = particularisation_config.matrix-synapse_turn_shared_secret_coturn;
@@ -23,5 +23,10 @@
     no-multicast-peers
     allowed-peer-ip=${particularisation_config.local_ip}
     external-ip=${particularisation_config.external_ip}
+    no-tlsv1
+    no-tlsv1_1
+    no-rfc5780
+    no-stun-backwards-compatibility
+    response-origin-only-with-rfc5780
   '';  
 }
