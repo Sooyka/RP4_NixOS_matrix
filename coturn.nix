@@ -1,4 +1,4 @@
-{particularisation_config, ...}:
+{particularisation_config}:
 {
   enable = true;
   min-port = particularisation_config.turn_minimal_listening_port;

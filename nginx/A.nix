@@ -1,4 +1,4 @@
-{particularisation_config, ...}:
+{particularisation_config}:
 {
 	# import ./ACME_SSL.nix
 	# addSSL = true;

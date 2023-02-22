@@ -1,7 +1,7 @@
 # let 
 #   particularisation_config = import ./particularisation_config.nix;
 # in
-{particularisation_config, ...}:
+{particularisation_config}:
 {
   recommendedTlsSettings = true;
   recommendedOptimisation = true;

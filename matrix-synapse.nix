@@ -1,4 +1,4 @@
-{particularisation_config, ...}:
+{particularisation_config}:
 {
   enable = true;
   settings = {

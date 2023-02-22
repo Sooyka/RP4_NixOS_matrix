@@ -83,14 +83,12 @@ in
 
   
   
-  environment.systemPackages = [
-    pkgs.htop
-    pkgs.libraspberrypi
-    pkgs.git
-    pkgs.helix
-    # pkgs.nginx
-    # pkgs.ddclient
-    # fan_controller
+  environment.systemPackages = with pkgs; [
+    htop
+    libraspberrypi
+    git
+    helix
+    shellcheck
   ];
 
 
@@ -172,7 +170,7 @@ in
 
   # List services that you want to enable:
   
-  # services.fan_controller = import ./fan_contoller.nix;
+  systemd.services.fan_controller = (import ./fan_controller.nix) {particularisation_config = particularisation_config; fan_controller = fan_controller; pkgs=pkgs;};
 
   # Enable the OpenSSH daemon.
   services.openssh = {
