@@ -61,12 +61,15 @@ in
   services.udev.extraRules = ''
     SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio",MODE="0660"
     SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio  /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
-    SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
-    SUBSYSTEM=="pwm*", ACTION=="add|change", RUN +="${pkgs.bash}/bin/bash - c 'chown -R root:gpio /sys/class/pwm/ && chmod -R 770 /sys/class/pwm/;\ 
-    chown -R root:gpio /sys/class/pwm/pwmchip0/ && chmod -R 770 /sys/class/pwm/pwmchip0/;\
-    chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0/ && chmod -R 770 /sys/class/pwm/pwmchip0/pwm0/;\
-    chown -R root:gpio /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ && chmod -R 770 /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ '"
-'';
+    SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
+    SUBSYSTEM=="pwm*", KERNEL=="pwmchip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport && chmod g=u /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport && \
+    echo 0 > /sys/class/pwm/pwmchip0/export && \
+    chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0 && chmod -R g=u /sys/class/pwm/pwmchip0/pwm0'" 
+    ''; 
+#     chown -R root:gpio /sys/class/pwm/pwmchip0/ && chmod -R 770 /sys/class/pwm/pwmchip0/ && \
+#     chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0/ && chmod -R 770 /sys/class/pwm/pwmchip0/pwm0/ && \
+#     chown -R root:gpio /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ && chmod -R 770 /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ '"
+# '';
 
 # chown -R root:gpio /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport; chmod -R 220 /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport;\ 
   
@@ -94,14 +97,13 @@ in
   
   
   environment.systemPackages = [
-    (pkgs.python3.withPackages (ps: with ps; [ libgpiod python-periphery ]))
-    pkgs.lm_sensors
     pkgs.htop
     pkgs.libraspberrypi
     pkgs.git
     pkgs.helix
-    pkgs.nginx
-    pkgs.ddclient
+    # pkgs.nginx
+    # pkgs.ddclient
+    # fan_controller
   ];
 
 
@@ -182,6 +184,8 @@ in
   # };
 
   # List services that you want to enable:
+  
+  # services.fan_controller = import ./fan_contoller.nix;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
