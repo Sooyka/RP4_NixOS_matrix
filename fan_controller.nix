@@ -5,7 +5,7 @@
   path = with pkgs; [
     fan_controller
     lm_sensors
-    python3.withPackages (ps: with ps; [ libgpiod python-periphery ])
+    (python3.withPackages (ps: with ps; [ libgpiod python-periphery ]))
   ];
   serviceConfig = {
     Type = "simple";
