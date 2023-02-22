@@ -4,7 +4,7 @@
   description = "Fan service";
   path = with pkgs; [
     fan_controller
-    pkgs.lm_sensors
+    lm_sensors
     python3.withPackages (ps: with ps; [ libgpiod python-periphery ])
   ];
   serviceConfig = {
