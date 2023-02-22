@@ -66,19 +66,6 @@ in
     echo 0 > /sys/class/pwm/pwmchip0/export && \
     chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0 && chmod -R g=u /sys/class/pwm/pwmchip0/pwm0'" 
     ''; 
-#     chown -R root:gpio /sys/class/pwm/pwmchip0/ && chmod -R 770 /sys/class/pwm/pwmchip0/ && \
-#     chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0/ && chmod -R 770 /sys/class/pwm/pwmchip0/pwm0/ && \
-#     chown -R root:gpio /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ && chmod -R 770 /sys/devices/platform/soc/fe20c000.pwm/pwm/pwmchip0/ '"
-# '';
-
-# chown -R root:gpio /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport; chmod -R 220 /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport;\ 
-  
-  
-    # SUBSYSTEM=="pwm*", PROGRAM="/bin/sh -c '\
-    #     chown -R root:gpio /sys/class/pwm && chmod -R 770 /sys/class/pwm;\
-    #     chown -R root:gpio /sys/devices/platform/soc/*.spi/spi_master/spi1/spi1.0/pwm/pwmchip0 && chmod -R 770 /sys/devices/platform/soc/*.spi/spi_master/spi1/spi1.0/pwm/pwmchip0\ 
-    #     ' " ''
-
 
 
   # Add user to group
