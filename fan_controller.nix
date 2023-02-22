@@ -11,7 +11,7 @@
     Type = "simple";
     User = "nixos";
     ExecStart = 
-      "${python.interpreter} fan_controller.py";
+      "python3 fan_controller.py";
    };
   wantedBy = [ "multi-user.target" ];
 }
