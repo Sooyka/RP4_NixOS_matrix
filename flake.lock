@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1677331121,
-        "narHash": "sha256-lLuYEFaL4E5VHbWHc2KeAE84zCjdlqPKgCweto8/Yps=",
+        "lastModified": 1677333386,
+        "narHash": "sha256-Y8tjZvzfCWmZQvYUdd0+3/RXqU2j5ex0d+hTZYsK2VU=",
         "owner": "Sooyka",
         "repo": "RP4_fan_service",
-        "rev": "33068e6c10e5700fa760f772074ee04ee465b38e",
+        "rev": "944e1ee5bde8540ee5fbf1344ae4d40e7be50701",
         "type": "github"
       },
       "original": {
