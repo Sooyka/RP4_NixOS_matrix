@@ -89,6 +89,7 @@ in
     git
     helix
     shellcheck
+    nix-tree
   ];
 
 

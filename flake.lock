@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676357437,
-        "narHash": "sha256-V8Pld55FBaeqULusTu2axiQmw5Dfuf7Mcn/TV1OXeOI=",
+        "lastModified": 1677331121,
+        "narHash": "sha256-lLuYEFaL4E5VHbWHc2KeAE84zCjdlqPKgCweto8/Yps=",
         "owner": "Sooyka",
         "repo": "RP4_fan_service",
-        "rev": "0f95ff7b00da2688717a10925403d99d66a0a52d",
+        "rev": "33068e6c10e5700fa760f772074ee04ee465b38e",
         "type": "github"
       },
       "original": {
@@ -23,11 +23,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1676177817,
-        "narHash": "sha256-OQnBnuKkpwkfNY31xQyfU5hNpLs1ilWt+hVY6ztEEOM=",
+        "lastModified": 1677179781,
+        "narHash": "sha256-+peLp16ruWLuTFHo0ZUbLlS1/meS/+RsWQQ9bUAzOh8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1b82144edfcd0c86486d2e07c7298f85510e7fb8",
+        "rev": "50c23cd4ff6c8344e0b4d438b027b3afabfe58dd",
         "type": "github"
       },
       "original": {
@@ -45,11 +45,11 @@
     },
     "rp4_hardware": {
       "locked": {
-        "lastModified": 1675933606,
-        "narHash": "sha256-y427VhPQHOKkYvkc9MMsL/2R7M11rQxzsRdRLM3htx8=",
+        "lastModified": 1677232326,
+        "narHash": "sha256-rAk2/80kLvA3yIMmSV86T1B4kNvwCFMSQ1FxXndaUB0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "44ae00e02e8036a66c08f4decdece7e3bbbefee2",
+        "rev": "2d44015779cced4eec9df5b8dab238b9f6312cb2",
         "type": "github"
       },
       "original": {

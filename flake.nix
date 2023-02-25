@@ -20,7 +20,7 @@
   };
 
   outputs =
-    { self, nixpkgs, rp4_hardware, fan_controller, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
     (
       {
         nixosConfigurations."RP4-NixOS" = nixpkgs.lib.nixosSystem {
