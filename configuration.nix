@@ -72,7 +72,7 @@ in
   users = {
     users = {
       nixos = {
-        extraGroups = [ "gpio" "video" "nginx"];
+        extraGroups = [ "gpio" "video" "nginx" "dynamic_content" ];
         isNormalUser = true;     
       };
       nginx.extraGroups = ["turnserver"];
