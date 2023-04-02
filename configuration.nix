@@ -72,7 +72,7 @@ in
   users = {
     users = {
       nixos = {
-        extraGroups = [ "gpio" "video" "nginx" "dynamic_content" ];
+        extraGroups = [ "gpio" "video" "nginx" ];
         isNormalUser = true;     
       };
       nginx.extraGroups = ["turnserver"];
@@ -90,6 +90,7 @@ in
     helix
     shellcheck
     nix-tree
+    speedtest-cli
   ];
 
 
