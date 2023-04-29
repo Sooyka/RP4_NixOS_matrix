@@ -91,6 +91,7 @@ in
     shellcheck
     nix-tree
     speedtest-cli
+    python39
   ];
 
 
