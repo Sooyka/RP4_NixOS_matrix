@@ -92,6 +92,7 @@ in
     nix-tree
     speedtest-cli
     python39
+    wget
   ];
 
 
@@ -109,8 +110,16 @@ in
 
   # environment.etc."dupa".text = "test dupy";
 
-  networking.hostName = particularisation_config.host_name; # Define your hostname.
-  networking.domain = particularisation_config.domain_name;
+  networking = {
+    hostName = particularisation_config.host_name; # Define your hostname.
+    domain = particularisation_config.domain_name;
+    extraHosts = 
+    ''
+      127.0.0.3 ${particularisation_config.domain_name} www.${particularisation_config.domain_name} matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
+      ::1 ${particularisation_config.domain_name} www.${particularisation_config.domain_name} matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
+    '';
+  };
+  
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
