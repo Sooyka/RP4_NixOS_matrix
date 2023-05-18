@@ -2,19 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, rp4_hardware, fan_controller, ... }:
+{ config, pkgs, ... }:
 let
-    device = "raspberry-pi/4";
     particularisation_config = import ./particularisation_config.nix;
     matrix-synapse_config = (import ./matrix-synapse.nix) {particularisation_config = particularisation_config;};
     coturn_config = (import ./coturn.nix) {particularisation_config = particularisation_config;};
     nginx_config = (import ./nginx.nix) {particularisation_config = particularisation_config;};
 in
 {
-  imports = [  
-    rp4_hardware.nixosModules.raspberry-pi-4
-  ];
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/NIXOS_SD";
@@ -23,8 +18,6 @@ in
     };
   };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  hardware.raspberry-pi."4".pwm0.enable = true;
 
   nixpkgs.hostPlatform = { system = particularisation_config.hostPlatform.system; config = particularisation_config.hostPlatform.config; };
 
@@ -58,21 +51,13 @@ in
 
 
   # Change permissions gpio devices
-  services.udev.extraRules = ''
-    SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio",MODE="0660"
-    SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio  /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
-    SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
-    SUBSYSTEM=="pwm*", KERNEL=="pwmchip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport && chmod g=u /sys/class/pwm/pwmchip0/export /sys/class/pwm/pwmchip0/unexport && \
-    echo 0 > /sys/class/pwm/pwmchip0/export && \
-    chown -R root:gpio /sys/class/pwm/pwmchip0/pwm0 && chmod -R g=u /sys/class/pwm/pwmchip0/pwm0'" 
-    ''; 
-
+  services.udev.extraRules = "";
 
   # Add user to group
   users = {
     users = {
       nixos = {
-        extraGroups = [ "gpio" "video" "nginx" ];
+        extraGroups = [ "nginx" ];
         isNormalUser = true;     
       };
       nginx.extraGroups = ["turnserver"];
@@ -112,11 +97,11 @@ in
 
   networking = {
     hostName = particularisation_config.host_name; # Define your hostname.
-    domain = particularisation_config.domain_name;
+    domain = "https://matrix." + particularisation_config.domain_name;
     extraHosts = 
     ''
-      127.0.0.3 ${particularisation_config.domain_name} www.${particularisation_config.domain_name} matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
-      ::1 ${particularisation_config.domain_name} www.${particularisation_config.domain_name} matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
+      127.0.0.3 matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
+      ::1 matrix.${particularisation_config.domain_name} turn.${particularisation_config.domain_name}
     '';
   };
   
@@ -182,8 +167,6 @@ in
 
   # List services that you want to enable:
   
-  systemd.services.fan_controller = (import ./fan_controller.nix) {particularisation_config = particularisation_config; fan_controller = fan_controller; pkgs=pkgs;};
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;

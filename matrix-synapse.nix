@@ -2,7 +2,7 @@
 {
   enable = true;
   settings = {
-    server_name = particularisation_config.domain_name;
+    server_name = "https://matrix." + particularisation_config.domain_name;
     public_baseurl = "https://matrix." + particularisation_config.domain_name + ":8448/";
     listeners = [
       {
@@ -37,7 +37,5 @@
   extraConfigFiles = [ 
     particularisation_config.keys_paths.matrix-synapse_registration_shared_secret
     particularisation_config.keys_paths.matrix-synapse_turn_shared_secret
-    particularisation_config.keys_paths.matrix-synapse_macaroon_secret_key
-    particularisation_config.keys_paths.matrix-synapse_form_secret
   ];
 }

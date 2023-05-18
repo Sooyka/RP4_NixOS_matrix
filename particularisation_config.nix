@@ -1,5 +1,5 @@
 {
-  host_name = ""; 
+  host_name = "NixOS-matrix"; 
   domain_name = "";
   email_address = "";
   hostPlatform = {
@@ -11,8 +11,8 @@
   public_ssh_key = "";
   ddclient_configFile = "";
   turn_cli-password = '''';
-  turn_minimal_listening_port = ;
-  turn_maximal_listening_port = ;
+  turn_minimal_listening_port = 64000;
+  turn_maximal_listening_port = 65535;
   matrix-synapse_turn_shared_secret_coturn = "";
   matrix-synapse_max_upload_size = "";
   keys_paths = {

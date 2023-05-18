@@ -1,2 +1,0 @@
-enableAMCE = true;
-forceSSL =true;
